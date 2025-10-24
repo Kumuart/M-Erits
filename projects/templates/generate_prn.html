@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PRN - M-Erits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Generate PRN</h2>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        {% if success %}
+        <div class="modal">
+            <h3>🎉 PRN Generated Successfully!</h3>
+            <p><strong>PRN Number:</strong> {{ prn.prnNumber }}</p>
+            <p><strong>Amount:</strong> KSh {{ prn.prnAmount }}</p>
+            <p><strong>Date:</strong> {{ prn.prnDate }}</p>
+            
+            <!-- SDK Push Request Section -->
+            <div class="sdk-section">
+                <h4>📱 Request SDK Push</h4>
+                <p>Send payment instructions to your mobile device:</p>
+                <div class="sdk-options">
+                    <button class="sdk-option" onclick="requestSDKPush('sms')">
+                        📱 SMS Push
+                    </button>
+                    <button class="sdk-option" onclick="requestSDKPush('whatsapp')">
+                        💬 WhatsApp
+                    </button>
+                    <button class="sdk-option" onclick="requestSDKPush('email')">
+                        📧 Email
+                    </button>
+                </div>
+                <div id="sdk-status" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="input-group">
+                <input type="text" name="tax_period_from" placeholder="Tax Period From YYYY-MM-DD" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="tax_period_to" placeholder="Tax Period To YYYY-MM-DD" required>
+            </div>
+            <div class="input-group">
+                <input type="number" name="gross_amount" placeholder="Gross Amount" required>
+            </div>
+            <div class="input-group">
+                <input type="number" step="0.01" name="tax_rate" placeholder="Tax Rate (%)" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="landlord_pin" placeholder="Landlord PIN" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="invoice_no" placeholder="Invoice Number" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="invoice_date" placeholder="Invoice Date YYYY-MM-DD" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="payment_date" placeholder="Payment Date YYYY-MM-DD" required>
+            </div>
+            <button type="submit">Generate PRN</button>
+        </form>
+        
+        <div class="back-link">
+            <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>

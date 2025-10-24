@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Erits Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>M-Erits Login</h2>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <div class="input-group">
+                <input type="text" name="pin" placeholder="Enter KRA PIN" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>

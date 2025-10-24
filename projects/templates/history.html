@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filing History - M-Erits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="history-container">
+        <h2>Previous Filings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>PRN</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for filing in filings %}
+                <tr>
+                    <td>{{ filing.year }}</td>
+                    <td>{{ filing.status }}</td>
+                    <td>{{ filing.prn }}</td>
+                    <td>KSh {{ filing.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="back-link">
+            <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>
